@@ -198,7 +198,7 @@ WITH employee (ID, Name, DOB) AS (
     VALUES (1, 'John', date('1990-10-09')), (2, 'Jane', date('2005-07-06')), (3, 'Max', date('1995-04-02')), (4, 'Jim', date('1899-2-23'))
 )
 SELECT
-    Name, date(DOB)
+    Name, DOB
 FROM employee
 WHERE DOB BETWEEN date('1990-01-01') AND date('2000-12-31');
 ```
