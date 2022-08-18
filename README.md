@@ -145,14 +145,24 @@ Given Employee Table with two columns ID, Salary 10, 2000 11, 5000 12, 3000
 WITH employee (ID, Salary) AS (
     VALUES (10, 2000), (11, 5000), (12, 3000)
 )
-SELECT *
-FROM employee emp1
-WHERE (N-1) = (
+SELECT
+    ID
+    , Salary
+FROM (
     SELECT
-        COUNT(DISTINCT(emp2.salary))
-    FROM employee emp2
-    WHERE emp2.salary > emp1.salary
-);
+        ROW_NUMBER() OVER () as n_row
+        , ID
+        , Salary
+    FROM (
+        SELECT
+            ID
+            , Salary
+        FROM employee
+        ORDER BY
+            Salary DESC
+    )
+)
+WHERE n_row = N;
 ```
 </details>
 
