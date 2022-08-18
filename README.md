@@ -56,15 +56,17 @@ GROUP BY DeptName;
     <summary>Solution</summary>
 
 ```sql
-WITH Table_A (ID) AS (
+WITH table_a (ID) AS (
     VALUES (10), (20), (30)
 )
-, Table_B (ID) AS (
+, table_b (ID) AS (
     VALUES (15), (30), (45)
 )
-SELECT * FROM Table_A
-MINUS
-SELECT * FROM Table_B;
+SELECT
+    tbl_a.ID
+FROM table_a AS tbl_a
+LEFT JOIN table_b AS tbl_b ON (tbl_a.ID = tbl_b.ID)
+WHERE tbl_b.ID IS NULL;
 ```
 </details>
 
